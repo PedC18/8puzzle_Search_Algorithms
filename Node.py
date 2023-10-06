@@ -1,13 +1,23 @@
 import copy
 
 class Node:
-    def __init__(self, State, empty_tile_x, empty_tile_y, nivel):
+    def __init__(self, State, empty_tile_x, empty_tile_y, nivel, parent = None):
         self.State = State
         self.empty_tile_x = empty_tile_x
         self.empty_tile_y = empty_tile_y
         self.nivel = nivel
+        self.parent = parent
 
+    def PrintState(self):
+        temp = self.State
+        result = ""
+        for i in range (3):
+            for j in range(3):
+                result += f"{temp[i][j]} "
 
+            result += "\n"
+        
+        print(result)
 
 def Right(node):
     temp = 0
@@ -68,4 +78,3 @@ def Down(node):
 
     newNode = Node(aux,x+1,y,nivel+1)
     return newNode
-

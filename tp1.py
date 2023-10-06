@@ -3,11 +3,14 @@ import copy
 from Node import *
 from SearchAlgorithms import *
 
-a = [[8,0,2],[5,7,3],[1,4,6]]
+a = [[1,5,2],[" ",4,3],[7,8,6]]
 
-node = Node(a,0,1,0)
+
+node = Node(a,1,0,0)
+
+node.PrintState()
 
 # node_final = BFS(node)
-node_final = IDS(node)
-print(node_final.State)
-print(node_final.nivel)
+# node_final = IDS(node)
+# print(node_final.State)
+# print(node_final.nivel)
