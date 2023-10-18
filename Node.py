@@ -1,4 +1,6 @@
 import copy
+import numpy as np
+import math
 
 class Node:
     def __init__(self, State, empty_tile_x, empty_tile_y, nivel, parent = None):
@@ -31,7 +33,7 @@ def Right(node):
     aux[x][y+1] = aux[x][y]
     aux[x][y] = temp
 
-    newNode = Node(aux,x,y+1,nivel+1)
+    newNode = Node(aux,x,y+1,nivel+1,node)
     return newNode
 
 def Left(node):
@@ -46,7 +48,7 @@ def Left(node):
     aux[x][y-1] = aux[x][y]
     aux[x][y] = temp
 
-    newNode = Node(aux,x,y-1,nivel+1)
+    newNode = Node(aux,x,y-1,nivel+1,node)
     return newNode
 
 def Up(node):
@@ -61,7 +63,7 @@ def Up(node):
     aux[x-1][y] = aux[x][y]
     aux[x][y] = temp
 
-    newNode = Node(aux,x-1,y,nivel+1)
+    newNode = Node(aux,x-1,y,nivel+1,node)
     return newNode
 
 def Down(node):
@@ -76,5 +78,26 @@ def Down(node):
     aux[x+1][y] = aux[x][y]
     aux[x][y] = temp
 
-    newNode = Node(aux,x+1,y,nivel+1)
+    newNode = Node(aux,x+1,y,nivel+1,node)
     return newNode
+
+def Tiles_Miss(node):
+        goal = [[1,2,3],[4,5,6],[7,8," "]]
+        counter = 0
+        for i in range (3):
+            for j in range (3):
+                if(node.State[i][j] != goal[i][j]):
+                    counter += 1
+        
+        return counter
+
+def Manhattan(node):
+    total_distance = 0
+    for i in range (3):
+        for j in range (3):
+            if node.State[i][j] != " ":
+                goal_row, goal_col = divmod(node.State[i][j]-1, 3)
+                distance = abs(i - goal_row) + abs(j - goal_col)
+                total_distance += distance
+    return total_distance
+            
